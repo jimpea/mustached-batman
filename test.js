@@ -13,7 +13,8 @@ window.onload = function() {
 
       reader.onload = function(e) {
         var data = new CsvData(reader.result);
-        fileDisplayArea.innerText = data.rawText();
+//        fileDisplayArea.innerText = data.rawText();
+          fileDisplayArea.innerHTML = data.htmlTable();
       }
 
       reader.readAsText(file);
@@ -27,14 +28,29 @@ window.onload = function() {
 // Represent the csv data
 function CsvData(csvtext) {
   this.text = csvtext;
+  
   this.rawText = function() {
-
-  return this.text;
+    return this.text;
   };
  
+  //From StackOverflow.com, see http://jsfiddle.net/frvQ2/
+  //Note: removed the 'slice(0,-1)' designed to remove trailing commas on the line:
+  //but we have no commas, neither do standard csv files, although there is no official standard for csv.
+  //Method assumes no trialing commas on the line.
+  //
   this.htmlTable = function() {
-    var table = "<table><tr><td>One</td><td>10</td></tr></table>";
-    return table;
+	  var data = this.text;
+	  var i;
+	  var output = [];
+	  var lines = data.split("\n");
+	  
+	  for (i = 0; i < lines.length; i++)
+		  output.push("<tr><td>"
+				  + lines[i].split(",").join("</td><td>")
+				  + "</td></tr>");
+	  output = "<table>" + output.join("") + "</table>";
+		
+	  return output;
   };
 
 }
