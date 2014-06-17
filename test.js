@@ -1,4 +1,9 @@
+//test.js
+//jim pearson 17 June 2014
+//Imports csv data from file and displays as html formatted table
+//
 //copied from blog.teamtreehouse.com
+//
 window.onload = function() {
   var fileInput = document.getElementById('fileInput');
   var fileDisplayArea = document.getElementById('fileDisplayArea');
