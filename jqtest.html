@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<!-- Based on the jquery.csv.js example page at googlecode.com-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>A JQuery Test</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="http://jquery-csv.googlecode.com/git/src/jquery.csv.js"></script>
+    <script>
+
+      $(function() {
+	    $("#tabs").tabs();
+      });
+      
+      $(document).ready(function () {
+        fileInput = $("#fileInput");
+
+        fileInput.change(function(e) {
+	    var file = this.files[0];
+	    var reader = new FileReader();
+
+	    reader.onload = function(e) {
+	      var data = $.csv.toArrays(this.result);
+	      var html = generateTable(data);
+	      $('#display-1').html(html);
+	    };
+
+	    reader.readAsText(file);
+         });
+
+      });
+      
+      function generateTable(data) {
+	      var html = '';
+
+	      if(typeof(data[0]) === 'undefined') {
+		      return null;
+	      }
+
+	      if(data[0].constructor === String) {
+		      html += '<tr>\r\n';
+		      for(var item in data) {
+			      html += '<td>' + data[item] + '</td>\r\n';
+		      }
+		      html += '</tr>\r\n';
+	      }
+
+	      if(data[0].constructor === Array) {
+		      for(var row in data) {
+			      html += '<tr>\r\n';
+			      for(var item in data[row]) {
+				      html += '<td>' + data[row][item] + '</td>\t\n';
+			      }
+			      html += '</tr>\t\n';
+		      }
+	      }
+	
+	      if(data[0].constructor === Object) {
+		      for(var row in data) {
+			      html += '<tr>\r\n';
+			      for(var item in data[row]) {
+				      html += '<td>' + item + ':' + data[row][item] + '</td>\t\n';
+			      }
+			      html += '</tr>\t\n';
+		      }
+	      }
+	      
+	      return html;
+      }
+
+
+      
+
+    </script>
+    <style>
+      textarea {
+        width: 100%;
+      }
+      .result {
+        width: 100%;
+	overflow: auto;
+      }
+      td {
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>A Jquery Test Document</h1>
+    <div id=tabs>
+      <ul>
+        <li><a href="#tabs-1">Intro</a></li>
+        <li><a href="#tabs-2">Text Display</a></li>	
+        <li><a href="#tabs-3">Object Display</a></li>
+      </ul>
+      <div id="tabs-1">
+        <h2>CSV Experminents</h2>
+	<p>Here we shall facilitate import of csv file from the client PC and display to formatted html, using the google javascript csv tool. Each tab will illustrate different ways of presenting the data: as a simple text display of the csv file and as a display of the csv data translated into javascript objects.</p> 
+      </div>
+      <div id="tabs-2">
+        <h2>Display File as HTML Table</h2>
+	   
+        <p>Select a csv file:</p>
+        <input type="file" id="fileInput" />
+	<div id="display-1">
+		<p>Table goes here</p>
+	</div>
+      </div>
+      <div id="tabs-3">
+	    <h2>Display File as Objects</h2>
+      </div>
+    </div>
+  </body>
+</html>
+
