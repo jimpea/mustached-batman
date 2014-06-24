@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html charset="utf-8">
+  <head>
+    <title>Chart Peaks</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <script src="http://jquery-csv.googlecode.com/git/src/jquery.csv.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <script src="jqtest.js"></script>
+    <script>
+$(function() {
+    $("#tabs").tabs();
+});
+
+$(document).ready(function() {
+  fileInput = $("#file-input");
+
+  fileInput.change(function(e) {
+    var file = this.files[0];
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+      var data = $.csv.toArrays(this.result);
+      var html = generateTable(data);
+      $('#display-table').html(html);
+      $('#display-list').text(data);
+    };
+    reader.readAsText(file);
+  });
+});
+
+    </script>
+  </head>
+  <body>
+    <h1>Peak Analysis</h1>
+     <div id="tabs">
+      <ul>
+        <li><a href="#tabs-1">Choose Data</a></li>
+        <li><a href="#tabs-2">Table</a></li>
+        <li><a href="#tabs-3">Properties</a></li>
+      </ul>
+      <div id="tabs-1">
+        <p>Select a file...</p>
+        <input type="file" id="file-input" /> 
+      </div>
+      <div id="tabs-2">
+        <p>Show table of data here</p>
+        <div id="display-table"></div>
+      </div>
+      <div id="tabs-3">
+        <p>List peaks and properties here</p>
+        <pre>
+          <div id="display-list"></div>
+        </pre>
+      </div>
+    </div>
+  </body>
+</html>
+

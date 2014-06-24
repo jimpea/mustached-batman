@@ -9,6 +9,9 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
     <script src="http://jquery-csv.googlecode.com/git/src/jquery.csv.js"></script>
     <script src="jqtest.js"></script>
+    <!-- 
+    <link href="style.css" rel="stylesheet" />
+    -->
     <script>
 $(function() {
   $("#tabs").tabs();
@@ -26,7 +29,6 @@ $(document).ready(function () {
         var data = $.csv.toArrays(this.result);
         var html = generateTable(data);
         $('#display-1').html(html);
-        //console.log(html);          
       };
 
       reader.readAsText(file);
@@ -40,7 +42,6 @@ $(document).ready(function () {
       var data = $.csv.toObjects(this.result);
       var html = generateTable(data);
       $('#display-2').html(html);
-      //console.log(html);
     };
 
     reader.readAsText(file);
@@ -80,7 +81,7 @@ $(document).ready(function () {
         </ul> 
       </div>
       <div id="tabs-2">
-        <h 2>Display File as HTML Table</h2>
+        <h2>Display File as HTML Table</h2>
         <p>Select a csv file:</p>
         <input type="file" id="fileInput-1" />
         <div id="display-1">
