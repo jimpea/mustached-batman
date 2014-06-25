@@ -23,7 +23,8 @@ $(document).ready(function() {
       var data = $.csv.toArrays(this.result);
       var html = generateTable(data);
       $('#display-table').html(html);
-      $('#display-list').text(data);
+      var txt = "Dummy test, data array length: " + data.length;
+      $('#display-list').text(txt);
     };
     reader.readAsText(file);
   });
