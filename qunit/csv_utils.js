@@ -42,6 +42,7 @@ var table_generator = function(data_array) {
         for(var row in data) {
           html += '\t<tr>';
           for(var item in data[row]) {
+
             html += '<td>' + item + ':' + data[row][item] + '</td>';
           }
           html += '</tr>\r\n';
@@ -50,11 +51,16 @@ var table_generator = function(data_array) {
       };
       return html;
     }(),
-  isValid: function() {
+  
+    isValid: function() {
       if(data[0].length >= 2) {
         return true;
       }
       return false;
+    }(),
+
+    data: function() {
+      return data;
     }()
   };
 };
