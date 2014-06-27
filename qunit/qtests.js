@@ -15,15 +15,16 @@ QUnit.test("table test", function(assert) {
 });
 
 QUnit.asyncTest("file load test", function(assert) {
-  expect(2);
+  expect(3);
 
   jQuery.get('trace.csv', function(data) {
     var data_array = $.csv.toArrays(data);
     var tabulator = table_generator(data_array);
     var expected_headers = ["s","uS"];
-    var expected_peak = [];
+    var expected_peaks = [9,21];
     assert.deepEqual(tabulator.data.length, 33, "The test csv file should generate 33 array entries");
     assert.deepEqual(tabulator.data[0], expected_headers, "The headers should be in the first array element");
+    assert.deepEqual(tabulator.peaks, expected_peaks, "The test csv file contains two peaks at 9 and 21 seconds");
     
     QUnit.start();
   });

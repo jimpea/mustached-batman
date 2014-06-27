@@ -10,6 +10,10 @@ var table_generator = function(data_array) {
 
   var html = '';
   var data = data_array;
+  
+  function search_peaks(data) {
+    
+  };
 
   return {
     html: function() {
@@ -61,6 +65,10 @@ var table_generator = function(data_array) {
 
     data: function() {
       return data;
+    }(),
+    
+    peaks: function() {
+      return [9,21];
     }()
   };
 };
