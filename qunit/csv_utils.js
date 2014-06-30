@@ -55,7 +55,7 @@ var table_generator = function(data_array) {
       };
       return html;
     }(),
-  
+
     isValid: function() {
       if(data[0].length >= 2) {
         return true;
@@ -66,9 +66,11 @@ var table_generator = function(data_array) {
     data: function() {
       return data;
     }(),
-    
+
     peaks: function() {
+      console.log("hello");
       return [9,21];
     }()
+    
   };
 };
