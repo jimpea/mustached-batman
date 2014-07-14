@@ -9,11 +9,12 @@
 var table_generator = function(data_array) {
 
   var html = '';
-  var data = data_array;
+  var headers = data_array[0];
+  var data = data_array.slice(1);
+  data.map(function(x) {
+    return Number(x);
+  });
   
-  function search_peaks(data) {
-    
-  };
 
   return {
     html: function() {
@@ -67,9 +68,38 @@ var table_generator = function(data_array) {
       return data;
     }(),
 
+    headers: function() {
+      return headers;
+    }(),
+    
     peaks: function() {
-      console.log("hello");
-      return [9,21];
+      //the data is in the file as strings. I must convert to number
+      //before running this test. The data also contains a header. I 
+      //should separate this out in the constructor into a separate
+      //array (two places)
+      
+      
+      var peak=[];
+      var slope = 0;
+      var response = data[0][1];
+      data.forEach(function(entry) {
+          if (response > entry[1]) {
+             slope = -1;          
+          } else {
+            if (response < entry[1]) {
+              slope = 1;
+            } else {
+              slope = 0;
+            }
+          };
+          slope = entry[1]-response;
+          response =  entry[1];
+          peak.push(slope);
+      });
+      peak.push(9);
+      peak.push(21);
+      //return [9,21];
+      return peak;
     }()
     
   };

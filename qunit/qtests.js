@@ -1,7 +1,7 @@
 //qtests.js
 //This series of tests assumes JQuery
 
-var input = [[1,1],[2,2]];
+var input = [["header 1", "header 2"],[1,1],[2,2]];
 var invalid_input= [1,2,3,4];
 var expected = "<table>\r\n\t<tr><td>1</td><td>1</td></tr>\r\n\t<tr><td>2</td><td>2</td></tr>\r\n</table>\r\n"
 
@@ -22,10 +22,10 @@ QUnit.asyncTest("file load test", function(assert) {
     var tabulator = table_generator(data_array);
     var expected_headers = ["s","uS"];
     var expected_peaks = [9,21];
-    assert.deepEqual(tabulator.data.length, 33, "The test csv file should generate 33 array entries");
-    assert.deepEqual(tabulator.data[0], expected_headers, "The headers should be in the first array element");
+    assert.deepEqual(tabulator.data.length, 32, "The test csv file should generate 33 array entries");
+    assert.deepEqual(tabulator.headers, expected_headers, "The headers should be those presented in the first line of the csv file");
     assert.deepEqual(tabulator.peaks, expected_peaks, "The test csv file contains two peaks at 9 and 21 seconds");
-    
+
     QUnit.start();
   });
 });
